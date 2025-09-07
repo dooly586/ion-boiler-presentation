@@ -165,6 +165,99 @@
             animation: sparkle 1.5s ease-in-out infinite;
         }
         
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .slide-container {
+                width: 100vw;
+                min-height: 100vh;
+                padding: 0 16px;
+            }
+            
+            .company-name {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+            
+            .title {
+                font-size: 36px !important;
+                margin-bottom: 16px;
+            }
+            
+            .subtitle {
+                font-size: 20px !important;
+                margin-bottom: 24px;
+            }
+            
+            .flex {
+                flex-direction: column;
+            }
+            
+            .w-1/2 {
+                width: 100%;
+                padding: 0;
+            }
+            
+            .product-image {
+                max-height: 200px !important;
+                margin-bottom: 20px;
+            }
+            
+            .stats-item {
+                font-size: 14px;
+                padding: 8px;
+            }
+            
+            .stats-item .font-bold {
+                font-size: 16px;
+            }
+            
+            .feature-item {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            
+            .footer-info {
+                position: relative;
+                bottom: auto;
+                margin-top: 20px;
+                padding: 0 16px;
+            }
+            
+            /* 파티클 효과 줄이기 */
+            .particle:nth-child(odd) {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 28px !important;
+            }
+            
+            .subtitle {
+                font-size: 16px !important;
+            }
+            
+            .product-image {
+                max-height: 150px !important;
+            }
+            
+            .stats-item .font-bold {
+                font-size: 14px;
+            }
+            
+            /* 매우 작은 화면에서는 파티클 최소화 */
+            .particle {
+                display: none;
+            }
+            
+            .particle:nth-child(1),
+            .particle:nth-child(8),
+            .particle:nth-child(15) {
+                display: block;
+            }
+        }
+        
         /* 이온/전자/원자 파티클 효과 */
         .particle-container {
             position: absolute;

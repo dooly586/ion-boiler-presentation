@@ -4,7 +4,11 @@
       "Bash(start \"C:\\Users\\JH Park\\Desktop\\온라인 비즈니스\\거래처\\뉴에너지\\화상회의\\ion_boiler_site\\index.html\")",
       "Bash(copy page_5.html page_6.html)",
       "Bash(copy page_4.html page_5.html)",
-      "Bash(copy page_3.html page_4.html)"
+      "Bash(copy page_3.html page_4.html)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

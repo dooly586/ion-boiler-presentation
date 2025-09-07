@@ -62,6 +62,49 @@
     .jump:hover { background: rgba(255,255,255,.9); }
     .jump.first { left: 20px; }
     .jump.last { right: 20px; }
+    
+    /* 모바일 최적화 */
+    @media (max-width: 768px) {
+      .arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
+        background: rgba(0,0,0,0.1);
+        border-radius: 50%;
+      }
+      .arrow.left { left: 5px; }
+      .arrow.right { right: 5px; }
+      
+      .pager {
+        bottom: 60px;
+        right: 10px;
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+      
+      .jump {
+        bottom: 20px;
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+      .jump.first { left: 10px; }
+      .jump.last { right: 10px; }
+      
+      .frame {
+        border-radius: 8px;
+        margin: 10px;
+      }
+    }
+    
+    /* 매우 작은 화면 */
+    @media (max-width: 480px) {
+      .arrow {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+      }
+      .jump { display: none; } /* 너무 작으면 점프 버튼 숨김 */
+    }
   </style>
 </head>
 <body>
@@ -124,8 +167,24 @@
   function scaleAll(){
     const vw=window.innerWidth, vh=window.innerHeight;
     const bw=1280, bh=720;
-    const s=Math.min(vw/bw, vh/bh);  // contain, no cropping
-    frames.forEach(f=>{ f.style.transform=`scale(${s})`; });
+    
+    // 모바일에서 더 나은 스케일링
+    let s = Math.min(vw/bw, vh/bh);
+    
+    // 모바일에서 최소 스케일 보장 (너무 작아지지 않도록)
+    if(vw < 768) { // 모바일 기준
+      s = Math.max(s, 0.4); // 최소 40% 크기 보장
+      
+      // 가로가 더 좁을 때는 가로 기준으로 스케일링
+      if(vw/vh < bw/bh) {
+        s = (vw * 0.95) / bw; // 양쪽 여백 5%
+      }
+    }
+    
+    frames.forEach(f=>{ 
+      f.style.transform=`scale(${s})`;
+      f.style.transformOrigin = 'center center';
+    });
   }
   // 화살표 버튼 상태 업데이트 함수
   function updateArrowStates() {
