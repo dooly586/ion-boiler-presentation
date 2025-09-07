@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>이온히팅보일러 프레젠테이션</title>
   <style>
     html, body { 
@@ -65,12 +65,26 @@
     
     /* 모바일 최적화 */
     @media (max-width: 768px) {
+      .slide-wrap {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+      
+      .frame {
+        width: 100vw !important;
+        height: 100vh !important;
+        border: none;
+        margin: 0;
+        border-radius: 0;
+      }
+      
       .arrow {
         width: 50px;
         height: 50px;
         font-size: 1.8rem;
-        background: rgba(0,0,0,0.1);
+        background: rgba(0,0,0,0.3);
         border-radius: 50%;
+        z-index: 9999;
       }
       .arrow.left { left: 5px; }
       .arrow.right { right: 5px; }
@@ -80,20 +94,21 @@
         right: 10px;
         font-size: 12px;
         padding: 4px 8px;
+        z-index: 9999;
+        background: rgba(0,0,0,0.7);
+        color: white;
       }
       
       .jump {
         bottom: 20px;
         font-size: 12px;
         padding: 4px 8px;
+        z-index: 9999;
+        background: rgba(0,0,0,0.7);
+        color: white;
       }
       .jump.first { left: 10px; }
       .jump.last { right: 10px; }
-      
-      .frame {
-        border-radius: 8px;
-        margin: 10px;
-      }
     }
     
     /* 매우 작은 화면 */
@@ -168,23 +183,24 @@
     const vw=window.innerWidth, vh=window.innerHeight;
     const bw=1280, bh=720;
     
-    // 모바일에서 더 나은 스케일링
-    let s = Math.min(vw/bw, vh/bh);
-    
-    // 모바일에서 최소 스케일 보장 (너무 작아지지 않도록)
     if(vw < 768) { // 모바일 기준
-      s = Math.max(s, 0.4); // 최소 40% 크기 보장
-      
-      // 가로가 더 좁을 때는 가로 기준으로 스케일링
-      if(vw/vh < bw/bh) {
-        s = (vw * 0.95) / bw; // 양쪽 여백 5%
-      }
+      // 모바일에서는 화면을 완전히 채우도록 설정
+      frames.forEach(f=>{ 
+        f.style.transform = 'none'; // 스케일링 제거
+        f.style.width = '100vw';
+        f.style.height = '100vh';
+        f.style.transformOrigin = 'top left';
+      });
+    } else {
+      // 데스크톱에서는 기존 스케일링 유지
+      let s = Math.min(vw/bw, vh/bh);
+      frames.forEach(f=>{ 
+        f.style.transform=`scale(${s})`;
+        f.style.width = '1280px';
+        f.style.height = '720px';
+        f.style.transformOrigin = 'center center';
+      });
     }
-    
-    frames.forEach(f=>{ 
-      f.style.transform=`scale(${s})`;
-      f.style.transformOrigin = 'center center';
-    });
   }
   // 화살표 버튼 상태 업데이트 함수
   function updateArrowStates() {
