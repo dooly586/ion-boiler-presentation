@@ -53,6 +53,74 @@ body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0; padding: 0;
 html {
     overflow: hidden;
 }
+
+/* 모바일 터치 스크롤 최적화 */
+@media (max-width: 768px) {
+    body {
+        width: 100vw;
+        min-width: 320px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .slide {
+        width: max(100vw, 800px); /* 최소 너비 보장 */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .title-box {
+        min-width: 800px;
+        padding: 12px 16px;
+    }
+    
+    .title-box h1 {
+        font-size: 24px;
+    }
+    
+    /* 메인 콘텐츠 영역 */
+    .flex.flex-1 {
+        min-width: 800px;
+        flex-direction: column;
+    }
+    
+    .w-1/2 {
+        width: 100%;
+        min-width: 780px;
+        margin-bottom: 20px;
+    }
+    
+    /* 차트 컨테이너 */
+    .chart-container {
+        min-width: 400px;
+    }
+    
+    /* 스크롤바 스타일링 */
+    body::-webkit-scrollbar,
+    .slide::-webkit-scrollbar {
+        height: 8px;
+    }
+    body::-webkit-scrollbar-track,
+    .slide::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+        border-radius: 4px;
+    }
+    body::-webkit-scrollbar-thumb,
+    .slide::-webkit-scrollbar-thumb {
+        background: rgba(0,150,136,0.5);
+        border-radius: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide {
+        min-width: 600px; /* 매우 작은 화면에서도 최소 너비 */
+    }
+    
+    .title-box h1 {
+        font-size: 20px;
+    }
+}
 </style>
 </head>
 <body>

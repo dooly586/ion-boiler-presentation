@@ -35,27 +35,52 @@
   
   /* 모바일 최적화 */
   @media (max-width: 768px) {
-    body { width: 100vw; min-width: 320px; }
-    .slide { width: 100vw; min-height: 100vh; }
+    body { 
+      width: 100vw; 
+      min-width: 320px;
+      overflow-x: auto; /* 수평 스크롤 허용 */
+    }
     
-    .title-box { padding: 12px 16px; }
+    .slide { 
+      width: max(100vw, 800px); /* 최소 800px 너비 보장 */
+      min-height: 100vh; 
+      overflow-x: auto; /* 수평 스크롤 허용 */
+    }
+    
+    .title-box { 
+      padding: 12px 16px; 
+      width: 100%;
+      min-width: 800px; /* 제목도 최소 너비 보장 */
+    }
     .title-box h1 { font-size: 24px; }
     
-    .flex { flex-direction: column; }
-    .w-3/5, .w-2/5 { width: 100%; padding: 0 16px; }
+    /* 메인 콘텐츠 영역 */
+    .flex.flex-1 {
+      min-width: 800px; /* 내용 영역 최소 너비 */
+      overflow-x: visible;
+    }
     
-    /* 표 반응형 */
+    .w-3/5, .w-2/5 { 
+      flex-shrink: 0; /* 크기 축소 방지 */
+    }
+    
+    /* 표 개선된 반응형 */
+    .overflow-hidden {
+      overflow-x: auto !important; /* 표 컨테이너 스크롤 */
+      -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+    }
+    
     .simple-rating-table { 
-      font-size: 11px; 
-      display: block; 
-      overflow-x: auto;
-      white-space: nowrap;
+      font-size: 12px; 
+      min-width: 600px; /* 표 최소 너비 */
+      width: auto;
     }
     .simple-rating-table th, .simple-rating-table td { 
-      padding: 6px 4px; 
-      min-width: 80px;
+      padding: 8px 6px; 
+      min-width: 90px; /* 컬럼 최소 너비 */
+      white-space: nowrap;
     }
-    .stars { font-size: 12px; }
+    .stars { font-size: 14px; }
     
     /* 우측 카드들 */
     .suggestion-card { margin-bottom: 12px; padding: 12px; }
@@ -64,6 +89,22 @@
     
     /* 이미지 */
     .mt-4 img { height: 120px; }
+    
+    /* 스크롤바 스타일링 */
+    .slide::-webkit-scrollbar,
+    .overflow-hidden::-webkit-scrollbar {
+      height: 8px;
+    }
+    .slide::-webkit-scrollbar-track,
+    .overflow-hidden::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+      border-radius: 4px;
+    }
+    .slide::-webkit-scrollbar-thumb,
+    .overflow-hidden::-webkit-scrollbar-thumb {
+      background: rgba(0,150,136,0.5);
+      border-radius: 4px;
+    }
   }
   
   @media (max-width: 480px) {
