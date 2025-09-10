@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Technology Introduction - Ion Heating Boiler</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    body {
+        width: 1280px;
+        min-height: 720px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        touch-action: pan-y;
+        pointer-events: auto;
+    }
+
+    .slide {
+        width: 1280px;
+        min-height: 720px;
+        position: relative;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ef 100%);
+    }
+
+    .grid-pattern {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(0, 150, 136, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 150, 136, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+
+    .title-box {
+        background: rgba(255, 255, 255, 0.9);
+        border-left: 5px solid #009688;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-left: 4px solid #009688;
+        transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-circle {
+        background: rgba(0, 150, 136, 0.1);
+        border: 2px solid rgba(0, 150, 136, 0.3);
+    }
+
+    .highlight-text {
+        color: #009688;
+        font-weight: bold;
+    }
+
+    .principle-box {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 150, 136, 0.3);
+    }
+
+    .efficiency-highlight {
+        background: rgba(0, 150, 136, 0.1);
+        border: 2px solid rgba(0, 150, 136, 0.3);
+    }
+
+    /* Left-right column bottom alignment */
+    .columns {
+        display: flex;
+        align-items: stretch;
+    }
+
+    /* Language switcher */
+    .lang-switcher {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 25px;
+        padding: 8px 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .lang-switcher a {
+        text-decoration: none;
+        color: #009688;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.3s ease;
+    }
+    .lang-switcher a:hover {
+        color: #00796b;
+    }
+    
+    html {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /* 스크롤바 스타일링 */
+    body::-webkit-scrollbar {
+        width: 8px;
+    }
+    body::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+        border-radius: 4px;
+    }
+    body::-webkit-scrollbar-thumb {
+        background: rgba(0,150,136,0.5);
+        border-radius: 4px;
+    }
+    body::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,150,136,0.7);
+    }
+</style>
+</head>
+<body>
+<!-- Language Switcher -->
+<div class="lang-switcher">
+    <a href="../ko/page_5.html">
+        <i class="fas fa-globe"></i> 한국어
+    </a>
+</div>
+<div class="slide flex flex-col" style="overflow: hidden;">
+    <!-- Background pattern -->
+    <div class="grid-pattern"></div>
+
+    <!-- Title section -->
+    <div class="title-box w-full py-2 px-10 mb-3 z-10">
+        <h1 class="text-3xl font-bold text-gray-800">Technology Introduction - Ion Heating Boiler</h1>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex flex-1 px-10 pb-2 z-10 columns">
+        <!-- Left column -->
+        <div class="w-1/2 pr-6 flex flex-col">
+            <div class="principle-box p-3 rounded-lg shadow-md mb-3 flex-1">
+                <div class="flex items-center mb-2">
+                    <div class="icon-circle w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-lightbulb text-green-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Operating Principle</h2>
+                </div>
+                <p class="text-gray-700 mb-3">Ion Heating Boiler operates on a unique principle that is differentiated from conventional indirect heating methods.</p>
+                <div class="mb-3 flex gap-3">
+                    <!-- Left: PDF preview -->
+                    <div class="w-1/2 relative rounded-md overflow-hidden">
+                        <img src="../Docs/pinfo_16_b.jpg" alt="Ion Heating Boiler Principle" class="w-full h-32 object-cover" 
+                             style="border: 1px solid #ddd;">
+
+                    </div>
+                    <!-- Right: MP4 video -->
+                    <div class="w-1/2 relative rounded-md overflow-hidden">
+                        <video controls loop class="w-full h-32 object-cover" style="border: 1px solid #ddd;">
+                            <source src="../Docs/ion heating.mp4" type="video/mp4">
+                            Unable to play video.
+                        </video>
+
+                    </div>
+                </div>
+                <p class="text-gray-700 mb-3"><i class="fas fa-check-circle text-green-600 mr-2"></i>Generates heat through ionic friction by directly applying alternating current to water, utilizing the frictional motion of ions present in water.</p>
+                <p class="text-gray-700 mb-3"><i class="fas fa-check-circle text-green-600 mr-2"></i>This utilizes the principle of 'water molecular friction heat', where water molecules and electrons move actively to directly generate thermal energy.</p>
+                <p class="text-gray-700"><i class="fas fa-check-circle text-green-600 mr-2"></i>Minimal heat loss and very high efficiency.</p>
+            </div>
+            <div class="efficiency-highlight p-3 rounded-lg flex items-center justify-center">
+                <div class="text-center">
+                    <p class="text-lg font-bold text-gray-800">Conversion Efficiency</p>
+                    <p class="text-4xl font-bold text-green-600">99.6%</p>
+                    <p class="text-sm text-gray-600">Published in Physics Society Paper Highlight</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="w-1/2 pl-6 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-700 mb-3">Core Technology Features</h3>
+            <div class="grid grid-cols-2 gap-3 flex-1">
+                <!-- Feature 1 -->
+                <div class="feature-card p-3 rounded-lg shadow-md">
+                    <div class="flex items-center mb-2">
+                        <div class="icon-circle w-8 h-8 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-bolt text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Fast Heating Speed</h3>
+                    </div>
+                    <p class="text-gray-700">Achieves required temperature quickly with <span class="highlight-text">approximately 2x</span> faster heating speed compared to conventional electric boilers.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card p-3 rounded-lg shadow-md">
+                    <div class="flex items-center mb-2">
+                        <div class="icon-circle w-8 h-8 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-thermometer-half text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Precise Temperature Control</h3>
+                    </div>
+                    <p class="text-gray-700">Enables precise temperature control of <span class="highlight-text">±0.1℃</span>, minimizing energy waste and providing stable temperature maintenance.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card p-3 rounded-lg shadow-md">
+                    <div class="flex items-center mb-2">
+                        <div class="icon-circle w-8 h-8 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-leaf text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Eco-friendly & Silent</h3>
+                    </div>
+                    <p class="text-gray-700">No carbon emissions or fine dust generation due to no combustion process, and virtually silent operation with electronic heating method.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature-card p-3 rounded-lg shadow-md">
+                    <div class="flex items-center mb-2">
+                        <div class="icon-circle w-8 h-8 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-compress-alt text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Easy Installation</h3>
+                    </div>
+                    <p class="text-gray-700">Easy installation without outdoor unit, refrigerant, or chimney, and compact size at <span class="highlight-text">1/6</span> the level of similar models enhances space utilization.</p>
+                </div>
+            </div>
+            <div class="mt-3 bg-white p-3 rounded-lg shadow-md">
+                <h3 class="text-lg font-semibold text-gray-700 mb-2 flex items-center">
+                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                    Key Features Summary
+                </h3>
+                <p class="text-gray-700">Ion Heating Boiler is more than just a heating device; it's an innovative heating solution that maximizes energy efficiency and dramatically reduces carbon emissions. This will be a key alternative for a sustainable future.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

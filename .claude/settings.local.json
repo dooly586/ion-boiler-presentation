@@ -9,7 +9,13 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(move page_*.html ko/)",
+      "Bash(move:*)",
+      "Bash(start script-viewer.html)",
+      "Bash(start chrome script-viewer.html)",
+      "Bash(start \"C:\\Users\\JH Park\\Desktop\\온라인 비즈니스\\거래처\\뉴에너지\\화상회의\\ion_boiler_site\\scripts\\script-viewer.html\")",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

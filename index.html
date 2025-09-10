@@ -1,242 +1,273 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"/>
-  <title>이온히팅보일러 프레젠테이션</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <title>New Energy - Ion Heating Boiler | 뉴에너지 - 이온히팅보일러</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
   <style>
-    html, body { 
-      margin: 0; height: 100%; overflow: hidden;
-      background: #000000;
+    body {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f2f1 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .slide-wrap {
-      position: absolute; inset: 0;
-      display: none;
-      align-items: center; justify-content: center;
-    }
-    .slide-wrap.active { display: flex; }
-    .frame {
-      width: 1280px; height: 720px;
-      border: 0; background:#fff;
-      transform-origin: center center;
-      will-change: transform;
-      box-shadow: 0 10px 30px rgba(0,0,0,.12);
-    }
-    .arrow {
-      position: fixed; top: 50%; transform: translateY(-50%);
-      width: 40px; height: 40px;
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(0,0,0,0.35);
-      font-size: 1.5rem;
-      cursor: pointer; z-index: 1000; user-select: none;
-      transition: color .25s, transform .2s;
-      text-shadow: 0 1px 2px rgba(255,255,255,.35);
-    }
-    .arrow:hover { color: rgba(0,0,0,0.7); transform: translateY(-50%) scale(1.2); }
-    .arrow:disabled, .arrow.disabled { 
-      color: rgba(0,0,0,0.15); 
-      cursor: not-allowed; 
-      pointer-events: none; 
-    }
-    .arrow:disabled:hover, .arrow.disabled:hover { 
-      transform: translateY(-50%) scale(1); 
-    }
-    .arrow.left { left: 10px; }
-    .arrow.right { right: 10px; }
-    .pager {
-      position: fixed; bottom: 90px; right: 20px;
-      color: #1b1b1b; font: 600 13px system-ui, sans-serif;
-      background: rgba(255,255,255,.65);
-      padding: 6px 12px; border-radius: 10px;
-      border: 1px solid rgba(0,0,0,.08);
-      z-index: 1000;
-    }
-    .jump {
-      position: fixed; bottom: 50px;
-      padding: 6px 12px; font-size: 13px;
-      background: rgba(255,255,255,.7);
-      border-radius: 8px; cursor: pointer; user-select: none;
-      font-weight: 600; color: #000; z-index: 1000;
-      transition: background .2s;
-    }
-    .jump:hover { background: rgba(255,255,255,.9); }
-    .jump.first { left: 20px; }
-    .jump.last { right: 20px; }
     
-    /* 모바일 최적화 */
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 20px;
+    }
+    
+    .logo {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #2e7d32;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: #43a047;
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    
+    .language-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #009688, #00796b);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 150, 136, 0.3);
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+    
+    .lang-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 150, 136, 0.4);
+      background: linear-gradient(135deg, #00796b, #004d40);
+    }
+    
+    .lang-btn[href="gallery.html"]:hover {
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5) !important;
+      background: linear-gradient(135deg, #ff8a50, #ff6b35) !important;
+    }
+    
+    .lang-btn[href="gallery-grid.html"]:hover {
+      box-shadow: 0 8px 25px rgba(156, 39, 176, 0.5) !important;
+      background: linear-gradient(135deg, #673ab7, #9c27b0) !important;
+    }
+    
+    .lang-btn i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    
+    .company-info {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 150, 136, 0.2);
+      color: #666;
+      font-size: 0.9rem;
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     @media (max-width: 768px) {
-      .slide-wrap {
-        width: 100vw !important;
-        height: 100vh !important;
+      .container {
+        padding: 40px 20px;
+        margin: 10px;
       }
       
-      .frame {
-        width: 100vw !important;
-        height: 100vh !important;
-        border: none;
-        margin: 0;
-        border-radius: 0;
+      .logo {
+        font-size: 2.5rem;
       }
       
-      .arrow {
-        width: 50px;
-        height: 50px;
-        font-size: 1.8rem;
-        background: rgba(0,0,0,0.3);
-        border-radius: 50%;
-        z-index: 9999;
-      }
-      .arrow.left { left: 5px; }
-      .arrow.right { right: 5px; }
-      
-      .pager {
-        bottom: 60px;
-        right: 10px;
-        font-size: 12px;
-        padding: 4px 8px;
-        z-index: 9999;
-        background: rgba(0,0,0,0.7);
-        color: white;
+      .subtitle {
+        font-size: 1rem;
       }
       
-      .jump {
-        bottom: 20px;
-        font-size: 12px;
-        padding: 4px 8px;
-        z-index: 9999;
-        background: rgba(0,0,0,0.7);
-        color: white;
+      .language-buttons {
+        flex-direction: column;
+        align-items: center;
       }
-      .jump.first { left: 10px; }
-      .jump.last { right: 10px; }
+      
+      .lang-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
     }
     
-    /* 매우 작은 화면 */
-    @media (max-width: 480px) {
-      .arrow {
-        width: 45px;
-        height: 45px;
-        font-size: 1.5rem;
-      }
-      .jump { display: none; } /* 너무 작으면 점프 버튼 숨김 */
+    /* 발표자 전용 숨겨진 버튼 */
+    .speaker-btn {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #d32f2f, #f44336);
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      animation: fadeInUp 0.5s ease-out;
+      cursor: pointer;
+    }
+    
+    .speaker-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+      background: linear-gradient(135deg, #b71c1c, #d32f2f);
+    }
+    
+    .speaker-btn i {
+      margin-right: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="slide-wrap active"><iframe class="frame" src="page_1.html" title="1"></iframe></div>
-  <div class="slide-wrap"><iframe class="frame" src="page_2.html" title="2"></iframe></div>
-  <div class="slide-wrap"><iframe class="frame" src="page_3.html" title="3"></iframe></div>
-  <div class="slide-wrap"><iframe class="frame" src="page_4.html" title="4"></iframe></div>
-  <div class="slide-wrap"><iframe class="frame" src="page_5.html" title="5"></iframe></div>
-  <div class="slide-wrap"><iframe class="frame" src="page_6.html" title="6"></iframe></div>
+  <!-- 발표자 전용 숨겨진 버튼 -->
+  <button class="speaker-btn" id="speakerBtn" onclick="openScriptViewer()">
+    <i class="fas fa-microphone"></i>
+    발표 대본
+  </button>
 
-  <div class="arrow left">◀</div>
-  <div class="arrow right">▶</div>
-  <div class="pager"><span id="cur">1</span> / <span id="tot">6</span></div>
-  <div class="jump first">⏮ 처음</div>
-  <div class="jump last">끝 ⏭</div>
-
-<script>
-  const wraps = Array.from(document.querySelectorAll('.slide-wrap'));
-  const frames = Array.from(document.querySelectorAll('.frame'));
-  const curEl = document.getElementById('cur'); const totEl = document.getElementById('tot');
-  totEl.textContent = wraps.length;
-  let i = 0;
-
-  function show(n, pushHash=true) {
-    // 경계값으로 제한 (순환하지 않음)
-    if(n < 0) n = 0;
-    if(n >= wraps.length) n = wraps.length - 1;
+  <div class="container">
+    <h1 class="logo">
+      이온히팅보일러<br>
+      Ion Heating Boiler
+    </h1>
     
-    wraps[i].classList.remove('active');
-    i = n; wraps[i].classList.add('active');
-    curEl.textContent = i+1;
-    if(pushHash) location.hash='#p='+(i+1);
+    <p class="subtitle">
+      차세대 탄소저감 난방솔루션<br>
+      Next-Generation Carbon Reduction Heating Solution
+    </p>
     
-    // 화살표 버튼 상태 업데이트
-    updateArrowStates();
-    scaleAll();
-  }
-
-  document.querySelector('.arrow.left').onclick=()=>show(i-1);
-  document.querySelector('.arrow.right').onclick=()=>show(i+1);
-  document.querySelector('.jump.first').onclick=()=>show(0);
-  document.querySelector('.jump.last').onclick=()=>show(wraps.length-1);
-
-  document.addEventListener('keydown', e=>{
-    if(e.key==='ArrowLeft') show(i-1);
-    if(e.key==='ArrowRight' || e.key===' ') show(i+1);
-    if(e.key==='Home') show(0);
-    if(e.key==='End') show(wraps.length-1);
-  });
-
-  function fromHash(){
-    const m=location.hash.match(/#p=(\d+)/);
-    if(m){const n=parseInt(m[1],10); if(!isNaN(n)) show(n-1,false);}
-  }
-  window.addEventListener('hashchange', fromHash); fromHash();
-  
-  // 초기 화살표 상태 설정
-  updateArrowStates();
-
-  function scaleAll(){
-    const vw=window.innerWidth, vh=window.innerHeight;
-    const bw=1280, bh=720;
+    <div class="language-buttons">
+      <a href="ko/index.html" class="lang-btn">
+        <i class="fas fa-globe"></i>
+        한국어 (Korean)
+      </a>
+      
+      <a href="en/index.html" class="lang-btn">
+        <i class="fas fa-globe"></i>
+        English
+      </a>
+      
+      <a href="gallery.html" class="lang-btn" style="background: linear-gradient(135deg, #ff6b35, #ff8a50); box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); animation-delay: 0.9s;">
+        <i class="fas fa-play"></i>
+        사진 슬라이드쇼 (Slideshow)
+      </a>
+      
+      <a href="gallery-grid.html" class="lang-btn" style="background: linear-gradient(135deg, #9c27b0, #673ab7); box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3); animation-delay: 1.2s;">
+        <i class="fas fa-th"></i>
+        사진 그리드 보기 (Grid View)
+      </a>
+    </div>
     
-    if(vw < 768) { // 모바일 기준
-      // 모바일에서는 화면을 완전히 채우도록 설정
-      frames.forEach(f=>{ 
-        f.style.transform = 'none'; // 스케일링 제거
-        f.style.width = '100vw';
-        f.style.height = '100vh';
-        f.style.transformOrigin = 'top left';
-      });
-    } else {
-      // 데스크톱에서는 기존 스케일링 유지
-      let s = Math.min(vw/bw, vh/bh);
-      frames.forEach(f=>{ 
-        f.style.transform=`scale(${s})`;
-        f.style.width = '1280px';
-        f.style.height = '720px';
-        f.style.transformOrigin = 'center center';
-      });
+    <div class="company-info">
+      <p><i class="far fa-copyright"></i> 2025 New Energy Co., Ltd.</p>
+      <p>뉴에너지 주식회사</p>
+    </div>
+  </div>
+
+  <script>
+    // 발표자 전용 버튼 활성화 (Ctrl + Shift + S)
+    let keySequence = [];
+    
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.shiftKey && event.key === 'S') {
+        event.preventDefault();
+        const speakerBtn = document.getElementById('speakerBtn');
+        if (speakerBtn.style.display === 'none' || speakerBtn.style.display === '') {
+          speakerBtn.style.display = 'block';
+          setTimeout(() => {
+            speakerBtn.style.display = 'none';
+          }, 10000); // 10초 후 자동 숨김
+        } else {
+          speakerBtn.style.display = 'none';
+        }
+      }
+    });
+
+    // 로고 더블클릭으로도 활성화 (숨겨진 기능)
+    let logoClickCount = 0;
+    document.querySelector('.logo').addEventListener('click', function() {
+      logoClickCount++;
+      if (logoClickCount === 3) {
+        const speakerBtn = document.getElementById('speakerBtn');
+        speakerBtn.style.display = 'block';
+        setTimeout(() => {
+          speakerBtn.style.display = 'none';
+        }, 10000);
+        logoClickCount = 0;
+      }
+      setTimeout(() => {
+        logoClickCount = 0;
+      }, 2000);
+    });
+
+    // 발표 대본 뷰어를 팝업으로 열기
+    function openScriptViewer() {
+      const popupWidth = 600;
+      const popupHeight = 800;
+      const screenWidth = window.screen.availWidth;
+      const screenHeight = window.screen.availHeight;
+      
+      // 팝업을 화면 오른쪽에 배치 (미트 화면과 겹치지 않도록)
+      const popupLeft = screenWidth - popupWidth - 20;
+      const popupTop = (screenHeight - popupHeight) / 2;
+      
+      const popup = window.open(
+        'scripts/script-viewer.html',
+        'scriptViewer',
+        `width=${popupWidth},height=${popupHeight},left=${popupLeft},top=${popupTop},` +
+        'scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,location=no'
+      );
+      
+      if (popup) {
+        popup.focus();
+        // 팝업이 열렸으면 버튼 숨기기
+        document.getElementById('speakerBtn').style.display = 'none';
+      } else {
+        alert('팝업이 차단되었습니다. 브라우저 설정에서 팝업을 허용해주세요.');
+      }
     }
-  }
-  // 화살표 버튼 상태 업데이트 함수
-  function updateArrowStates() {
-    const leftArrow = document.querySelector('.arrow.left');
-    const rightArrow = document.querySelector('.arrow.right');
-    
-    if(i === 0) {
-      leftArrow.classList.add('disabled');
-    } else {
-      leftArrow.classList.remove('disabled');
-    }
-    
-    if(i === wraps.length - 1) {
-      rightArrow.classList.add('disabled');
-    } else {
-      rightArrow.classList.remove('disabled');
-    }
-  }
-
-  window.addEventListener('resize', scaleAll); scaleAll();
-
-  let tmr; document.addEventListener('wheel', e=>{
-    clearTimeout(tmr); tmr=setTimeout(()=>{ if(e.deltaY>0) show(i+1); else show(i-1); },40);
-  },{passive:true});
-
-  let sx=null, sy=null;
-  document.addEventListener('touchstart', e=>{sx=e.touches[0].clientX; sy=e.touches[0].clientY;},{passive:true});
-  document.addEventListener('touchend', e=>{
-    if(sx===null||sy===null)return;
-    const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
-    if(Math.abs(dx)>50||Math.abs(dy)>50){
-      if(Math.abs(dx)>=Math.abs(dy)){ if(dx<0) show(i+1); else show(i-1); }
-      else{ if(dy<0) show(i+1); else show(i-1); }
-    }
-    sx=sy=null;
-  },{passive:true});
-</script>
+  </script>
 </body>
 </html>

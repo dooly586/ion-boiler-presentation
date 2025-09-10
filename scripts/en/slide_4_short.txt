@@ -1,0 +1,3 @@
+Official KCL testing achieved 28.1% power savings and 43% carbon reduction.
+
+Temperature precision of ±0.1°C and 2x faster heating speed - verified by an authoritative institution.

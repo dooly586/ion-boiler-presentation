@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>국내 대기업 실증 사례</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {width: 1280px;overflow: hidden; margin: 0; padding: 0; touch-action: pan-y; pointer-events: auto;}
+.slide {
+    width: 1280px;
+
+    position: relative;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ef 100%);
+}
+.grid-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 150, 136, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 150, 136, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+.title-box {
+    background: rgba(255, 255, 255, 0.9);
+    border-left: 5px solid #009688;
+}
+.case-study-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-left: 4px solid #009688;
+    transition: all 0.3s ease;
+}
+.case-study-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+.stat-card {
+    background: rgba(0, 150, 136, 0.1);
+    border: 1px solid rgba(0, 150, 136, 0.3);
+}
+.icon-circle {
+    background: rgba(0, 150, 136, 0.1);
+    border: 2px solid rgba(0, 150, 136, 0.3);
+}
+.highlight-text {
+    color: #009688;
+    font-weight: bold;
+}
+/* Language switcher */
+.lang-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.lang-switcher a {
+    text-decoration: none;
+    color: #009688;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+}
+.lang-switcher a:hover {
+    color: #00796b;
+}
+
+html {
+    overflow: hidden;
+}
+
+/* 모바일 터치 스크롤 최적화 */
+@media (max-width: 768px) {
+    body {
+        width: 100vw;
+        min-width: 320px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .slide {
+        width: max(100vw, 800px); /* 최소 너비 보장 */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .title-box {
+        min-width: 800px;
+        padding: 12px 16px;
+    }
+    
+    .title-box h1 {
+        font-size: 24px;
+    }
+    
+    /* 메인 콘텐츠 영역 */
+.flex.flex-1 { 
+  max-height: calc(720px - 60px); /* 제목 영역 실제 높이에 맞게 수치 조정 */
+  overflow: hidden;
+}
+
+    .w-1/2 {
+        width: 100%;
+        min-width: 780px;
+        margin-bottom: 20px;
+    }
+    
+    /* 차트 컨테이너 */
+    .chart-container {
+        min-width: 400px;
+    }
+    
+    /* 스크롤바 스타일링 */
+    body::-webkit-scrollbar,
+    .slide::-webkit-scrollbar {
+        height: 8px;
+    }
+    body::-webkit-scrollbar-track,
+    .slide::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+        border-radius: 4px;
+    }
+    body::-webkit-scrollbar-thumb,
+    .slide::-webkit-scrollbar-thumb {
+        background: rgba(0,150,136,0.5);
+        border-radius: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide {
+        min-width: 600px; /* 매우 작은 화면에서도 최소 너비 */
+    }
+    
+    .title-box h1 {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- Language Switcher -->
+<div class="lang-switcher">
+    <a href="../en/page_2.html">
+        <i class="fas fa-globe"></i> English
+    </a>
+</div>
+<div class="slide flex flex-col" style="overflow: hidden;">
+<!-- Background pattern -->
+<div class="grid-pattern"></div>
+<!-- Title section -->
+<div class="title-box w-full py-2 px-10 mb-3 z-10">
+<h1 class="text-3xl font-bold text-gray-800">국내 대기업 실증 사례</h1>
+</div>
+<!-- Main content -->
+<div class="flex flex-1 px-10 pb-2 z-10">
+<!-- Left column - Case study -->
+<div class="w-1/2 pr-6 flex flex-col">
+<div class="case-study-card p-3 rounded-lg shadow-md mb-2 flex-1">
+<div class="flex items-center mb-2">
+<div class="icon-circle w-8 h-8 rounded-full flex items-center justify-center mr-2">
+<i class="fas fa-industry text-green-600"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">현대자동차 아산공장</h2>
+</div>
+<img alt="현대자동차 아산공장" class="w-full h-48 object-cover rounded-md mb-2" src="https://picture-search.skywork.ai/aippt/image/sheet/74ef5b09480fb737cfad55955bd3acbe.jpg" data-sk-source-container="img" data-sk-source-url="https://www.mk.co.kr/news/economy/7486238" data-sk-source-id="1964344023462912004">
+<p class="text-gray-700 mb-2 text-sm">이온히팅시스템 도입으로 연간 약 <span class="highlight-text">14.5억 원</span>의 에너지 비용을 절감하고, <span class="highlight-text">2,456톤</span>의 이산화탄소 배출량을 감축하는 성과를 달성했습니다.</p>
+<p class="text-gray-700 text-sm">현대자동차의 2025년 지속가능경영보고서에 에너지 절감 우수 사례로 공식 등재되었습니다.</p>
+</div>
+
+<!-- 주요 적용 사례 -->
+<div class="bg-white p-2 rounded-lg shadow-md">
+<h3 class="text-lg font-semibold mb-2 text-gray-700">주요 적용 사례</h3>
+<div class="space-y-2">
+<div class="case-item bg-blue-50 p-2 rounded-lg">
+<div class="font-bold text-blue-800 text-sm">현대차 아산공장</div>
+<div class="text-xs">
+<span class="font-medium">운전비용:</span> 60% 절감, <span class="font-medium">탄소배출:</span> 43% 감축 (27톤/2개월)
+</div>
+</div>
+<div class="case-item bg-blue-50 p-2 rounded-lg">
+<div class="font-bold text-blue-800 text-sm">대상 식품공장</div>
+<div class="text-xs">
+<span class="font-medium">운전비용:</span> 41% 절감, <span class="font-medium">탄소배출:</span> 43% 감축 (12톤/1개월)
+</div>
+</div>
+<div class="case-item bg-blue-50 p-2 rounded-lg">
+<div class="font-bold text-blue-800 text-sm">노벨리스코리아</div>
+<div class="text-xs">
+<span class="font-medium">운전비용:</span> 46% 절감, <span class="font-medium">탄소배출:</span> 43% 감축 (27톤/3개월)
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right column - Stats -->
+<div class="w-1/2 pl-6 flex flex-col">
+<div class="mb-2">
+<h3 class="text-xl font-semibold text-gray-700 mb-2">성능 검증 결과</h3>
+<p class="text-gray-600 mb-2 text-sm">102개 사이트에 설치된 이온히팅시스템은 기존 화석연료 보일러를 대체하여 다음의 효과를 가져왔습니다:</p>
+<div class="flex space-x-4 mb-2">
+<div class="stat-card flex-1 p-3 rounded-lg flex flex-col items-center justify-center">
+<div class="icon-circle w-10 h-10 rounded-full flex items-center justify-center mb-1">
+<i class="fas fa-bolt text-green-600"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">에너지 절감</p>
+<p class="text-2xl font-bold text-green-600">50%+</p>
+</div>
+<div class="stat-card flex-1 p-3 rounded-lg flex flex-col items-center justify-center">
+<div class="icon-circle w-10 h-10 rounded-full flex items-center justify-center mb-1">
+<i class="fas fa-leaf text-green-600"></i>
+</div>
+<p class="text-sm font-bold text-gray-800">탄소 배출량 저감</p>
+<p class="text-2xl font-bold text-green-600">40%+</p>
+</div>
+</div>
+</div>
+<!-- Chart.js Chart -->
+<div class="bg-white p-2 rounded-lg shadow-md mb-2 flex-1">
+<h3 class="text-lg font-semibold text-gray-700 mb-1">주요 설치 사례 에너지 절감 효과</h3>
+<div class="chart-container" style="width: 100%; height: 180px;">
+<canvas id="savingsChart"></canvas>
+</div>
+</div>
+
+<!-- 전국 설치 현황 -->
+<div class="bg-white p-2 rounded-lg shadow-md">
+<h3 class="text-lg font-semibold text-gray-700 mb-2">전국 설치 현황</h3>
+<div class="stat-card p-2 rounded-lg text-center">
+<div class="flex items-center justify-center mb-1">
+<div class="icon-circle w-8 h-8 rounded-full flex items-center justify-center mr-2">
+<i class="fas fa-map-marker-alt text-green-600"></i>
+</div>
+<div>
+<p class="text-base font-bold text-gray-800">전국 102개 현장</p>
+<p class="text-xs text-gray-600">롯데월드, 아산병원 등</p>
+</div>
+</div>
+<div class="text-center">
+<p class="text-xl font-bold text-green-600">2,304.6 tCO₂</p>
+<p class="text-xs text-gray-600">연간 탄소 감축량</p>
+</div>
+</div>
+</div>
+<script>
+function createChart() {
+    const canvas = document.getElementById('savingsChart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Clear any existing chart
+    if (window.savingsChartInstance) {
+        window.savingsChartInstance.destroy();
+    }
+    
+    window.savingsChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['현대차 아산공장', '대상 식품공장', '노벨리스코리아'],
+            datasets: [
+                {
+                    label: '에너지 비용 절감 (%)',
+                    data: [60, 41, 46],
+                    backgroundColor: '#2962ff',
+                    borderColor: '#0d47a1',
+                    borderWidth: 1
+                },
+                {
+                    label: '탄소 배출 감축 (%)',
+                    data: [43, 43, 43],
+                    backgroundColor: '#00acc1',
+                    borderColor: '#0097a7',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 70,
+                    title: {
+                        display: true,
+                        text: '절감 효과 (%)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+}
+
+// Initialize chart after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(createChart, 100);
+});
+
+// Also try to create chart when window loads (for iframe compatibility)
+window.addEventListener('load', function() {
+    setTimeout(createChart, 200);
+});
+
+// Recreate chart on resize
+window.addEventListener('resize', function() {
+    setTimeout(createChart, 100);
+});
+</script>
+
+</body>
+</html>

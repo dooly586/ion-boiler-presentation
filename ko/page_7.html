@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>히트펌프 vs 전기보일러 vs 이온히팅보일러 실증테스트 제안</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {width:1280px; min-height:720px; overflow:hidden; margin:0; padding:0; touch-action: pan-y; pointer-events: auto;}
+  .slide {width:1280px; min-height:720px; position:relative;
+          background:linear-gradient(135deg,#f0f9ff 0%,#e6f7ef 100%);}
+  .grid-pattern {position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,150,136,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,150,136,.05) 1px, transparent 1px);
+    background-size:20px 20px;}
+  .title-box {background:rgba(255,255,255,.9); border-left:5px solid #009688;}
+
+  .option-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    background: rgba(255,255,255,.95);
+    transition: all 0.3s ease;
+  }
+  .option-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  }
+  .option-header {
+    background: linear-gradient(135deg, #009688, #00796b);
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 16px 20px;
+  }
+  .comparison-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .comparison-item:last-child {
+    border-bottom: none;
+  }
+  .icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 12px;
+  }
+  .tech-comparison {
+    background: rgba(255,255,255,.9);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  /* Language switcher */
+  .lang-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .lang-switcher a {
+    text-decoration: none;
+    color: #009688;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+  }
+  .lang-switcher a:hover {
+    color: #00796b;
+  }
+  
+  html{overflow:hidden;}
+  
+  /* 모바일 최적화 */
+  @media (max-width: 768px) {
+    body { width: 100vw; min-width: 320px; }
+    .slide { width: 100vw; min-height: 100vh; }
+    
+    .title-box { padding: 12px 16px; }
+    .title-box h1 { font-size: 20px; }
+    
+    .grid { grid-template-columns: 1fr; }
+    .option-card { margin-bottom: 16px; }
+    .option-header { padding: 12px 16px; }
+    .option-header h2 { font-size: 18px; }
+    .tech-comparison { margin: 12px 16px; padding: 16px; }
+    
+    .comparison-item { padding: 6px 0; }
+    .icon-circle { width: 32px; height: 32px; margin-right: 8px; }
+  }
+  
+  @media (max-width: 480px) {
+    .title-box h1 { font-size: 18px; }
+    .option-header h2 { font-size: 16px; }
+    .tech-comparison { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<!-- Language Switcher -->
+<div class="lang-switcher">
+    <a href="../en/page_7.html">
+        <i class="fas fa-globe"></i> English
+    </a>
+</div>
+<div class="slide flex flex-col">
+  <div class="grid-pattern"></div>
+
+  <!-- 제목 -->
+  <div class="title-box w-full py-4 px-10 mb-4 z-10">
+    <h1 class="text-3xl font-bold text-gray-800">히트펌프 vs 전기보일러 vs 이온히팅보일러 실증테스트 제안</h1>
+    <p class="text-lg text-gray-600 mt-1">3가지 난방 시스템 성능 및 효율성 비교를 위한 실증 테스트 방안</p>
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <div class="flex flex-1 px-10 pb-6 z-10">
+    <div class="grid grid-cols-2 gap-8 w-full">
+      <!-- 옵션 1: ESC Living Lab -->
+      <div class="option-card">
+        <div class="option-header">
+          <div class="flex items-center">
+            <div class="icon-circle bg-teal-600">
+              <i class="fas fa-house-user"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold">옵션 1: Energy Systems Catapult</h2>
+              <p class="text-sm opacity-90">Living Lab & WESA</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="font-bold text-gray-700 mb-3">목적: 실제 주택 환경에서 3가지 기술의 성능 및 사용자 반응 비교</p>
+          <div class="mb-3">
+            <p class="font-medium text-gray-700">범위:</p>
+            <p class="ml-4 text-gray-600">• 영국 전역 5,500 가구 중 일부 파일럿 설치</p>
+          </div>
+          <div>
+            <p class="font-medium text-gray-700 mb-2">측정 항목:</p>
+            <ul class="ml-4">
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-bolt text-yellow-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">전력 사용량(kWh)</span>
+              </li>
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-temperature-high text-red-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">난방 응답 속도 및 온도 유지 능력</span>
+              </li>
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-user-check text-blue-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">사용자 편의성 및 설치 용이성</span>
+              </li>
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-leaf text-green-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">탄소 배출 저감 효과</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 2: University of Salford -->
+      <div class="option-card">
+        <div class="option-header">
+          <div class="flex items-center">
+            <div class="icon-circle bg-indigo-600">
+              <i class="fas fa-flask"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold">옵션 2: University of Salford</h2>
+              <p class="text-sm opacity-90">Energy House 2.0</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="font-bold text-gray-700 mb-3">목적: 혹한·혹서 및 다양한 기상 조건에서 정밀 성능 비교</p>
+          <div class="mb-3">
+            <p class="font-medium text-gray-700">방법:</p>
+            <p class="ml-4 text-gray-600">• 동일 주택 조건에서 3가지 난방 시스템 교차 시험</p>
+          </div>
+          <div>
+            <p class="font-medium text-gray-700 mb-2">측정 항목:</p>
+            <ul class="ml-4">
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-tachometer-alt text-purple-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">에너지 효율(소비전력 대비 난방량)</span>
+              </li>
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-snowflake text-blue-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">극저온(-20°C) 대응 성능</span>
+              </li>
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-sliders-h text-orange-500 mt-1 mr-2"></i>
+                <span class="text-gray-600">온도 제어 정밀도</span>
+              </li>
+              <li class="comparison-item flex items-start">
+                <i class="fas fa-tools text-gray-600 mt-1 mr-2"></i>
+                <span class="text-gray-600">장치별 설치 공간 및 유지보수 부담</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기술 비교 아이콘 -->
+  <div class="tech-comparison">
+    <div class="flex justify-center items-center">
+      <div class="flex items-center px-4">
+        <div class="icon-circle bg-blue-500">
+          <i class="fas fa-wind"></i>
+        </div>
+        <span class="font-medium text-gray-700">히트펌프</span>
+      </div>
+      <div class="text-gray-400 mx-3 text-lg">vs</div>
+      <div class="flex items-center px-4">
+        <div class="icon-circle bg-red-500">
+          <i class="fas fa-fire"></i>
+        </div>
+        <span class="font-medium text-gray-700">전기보일러</span>
+      </div>
+      <div class="text-gray-400 mx-3 text-lg">vs</div>
+      <div class="flex items-center px-4">
+        <div class="icon-circle bg-teal-500">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <span class="font-medium text-gray-700">이온히팅보일러</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

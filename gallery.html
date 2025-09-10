@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>이온히팅보일러 설치 사진 갤러리 | Ion Heating Boiler Installation Gallery</title>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      background: #000;
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    .gallery-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    .slide.active {
+      display: block;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+    
+    
+    /* Navigation */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .nav-btn.prev {
+      left: 30px;
+    }
+    
+    .nav-btn.next {
+      right: 30px;
+    }
+    
+    .nav-btn.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    /* Thumbnail Navigation */
+    .thumbnail-bar {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      width: 90%;
+      max-width: 800px;
+      height: 80px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 10px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .thumbnail-bar.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Hover detection zone */
+    .thumbnail-hover-zone {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      z-index: 99;
+      pointer-events: auto;
+    }
+    
+    .thumbnail-container {
+      width: 100%;
+      height: 60px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      scroll-behavior: smooth;
+    }
+    
+    .thumbnail-container::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    .thumbnail-container::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+    }
+    
+    .thumbnail-container::-webkit-scrollbar-thumb {
+      background: rgba(0,150,136,0.6);
+      border-radius: 2px;
+    }
+    
+    .thumbnail {
+      width: 80px;
+      height: 60px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .thumbnail:hover {
+      transform: scale(1.1);
+      border-color: rgba(255,255,255,0.5);
+    }
+    
+    .thumbnail.active {
+      border-color: rgba(0,150,136,1);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(0,150,136,0.5);
+    }
+    
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .counter {
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .play-pause {
+      background: rgba(0,150,136,0.9);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .play-pause:hover {
+      background: rgba(0,150,136,1);
+      transform: scale(1.1);
+    }
+    
+    .thumbnail-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 101;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .thumbnail-toggle:hover {
+      background: rgba(0,150,136,0.8);
+      transform: scale(1.1);
+      border-color: rgba(0,150,136,0.5);
+    }
+    
+    .thumbnail-toggle.active {
+      background: rgba(0,150,136,0.9);
+      border-color: rgba(0,150,136,0.8);
+    }
+    
+    /* Hide all UI mode */
+    body.hide-ui .nav-btn,
+    body.hide-ui .controls,
+    body.hide-ui .home-btn,
+    body.hide-ui .dots,
+    body.hide-ui .thumbnail-bar,
+    body.hide-ui .thumbnail-toggle {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    body.hide-ui .thumbnail-hover-zone {
+      pointer-events: none;
+    }
+    
+    /* Home button */
+    .home-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      background: rgba(0,150,136,0.9);
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    
+    .home-btn:hover {
+      background: rgba(0,150,136,1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,150,136,0.4);
+    }
+    
+    .dots {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .dot.active {
+      background: rgba(0,150,136,0.9);
+      transform: scale(1.2);
+    }
+    
+    /* Loading */
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.2rem;
+      z-index: 200;
+    }
+    
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+      
+      .nav-btn.prev {
+        left: 15px;
+      }
+      
+      .nav-btn.next {
+        right: 15px;
+      }
+      
+      .home-btn {
+        top: 15px;
+        left: 15px;
+        padding: 10px 16px;
+        font-size: 12px;
+      }
+      
+      .home-btn[style*="top: 120px"] {
+        top: 65px !important;
+      }
+      
+      .dots {
+        top: 15px;
+        right: 15px;
+      }
+      
+      .thumbnail-bar {
+        bottom: 60px;
+        width: 95%;
+        height: 70px;
+        padding: 8px;
+        transform: translateX(-50%) translateY(100%);
+      }
+      
+      .thumbnail-bar.visible {
+        transform: translateX(-50%) translateY(0);
+      }
+      
+      .thumbnail-container {
+        height: 54px;
+        gap: 6px;
+      }
+      
+      .thumbnail {
+        width: 72px;
+        height: 54px;
+      }
+      
+      .thumbnail:hover {
+        transform: scale(1.05);
+      }
+      
+      .thumbnail.active {
+        transform: scale(1.05);
+      }
+      
+      .controls {
+        bottom: 10px;
+        gap: 15px;
+      }
+      
+      .play-pause {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+      }
+      
+      .counter {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      
+      .thumbnail-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Extra small mobile */
+    @media (max-width: 480px) {
+      .thumbnail-bar {
+        bottom: 50px;
+        width: 98%;
+        height: 60px;
+        padding: 6px;
+      }
+      
+      .thumbnail-container {
+        height: 48px;
+        gap: 4px;
+      }
+      
+      .thumbnail {
+        width: 64px;
+        height: 48px;
+      }
+      
+      .home-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">로딩 중...</div>
+  
+  <div class="gallery-container">
+    <!-- Slides will be populated by JavaScript -->
+  </div>
+  
+  <!-- Navigation -->
+  <button class="nav-btn prev" id="prevBtn">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  
+  <button class="nav-btn next" id="nextBtn">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+  
+  <!-- Thumbnail hover detection zone -->
+  <div class="thumbnail-hover-zone" id="thumbnailHoverZone"></div>
+  
+  <!-- Thumbnail Navigation -->
+  <div class="thumbnail-bar" id="thumbnailBar">
+    <div class="thumbnail-container" id="thumbnailContainer">
+      <!-- Thumbnails will be populated by JavaScript -->
+    </div>
+  </div>
+  
+  <!-- Controls -->
+  <div class="controls">
+    <div class="counter">
+      <span id="current">1</span> / <span id="total">0</span>
+    </div>
+    <button class="play-pause" id="playPause">
+      <i class="fas fa-pause"></i>
+    </button>
+  </div>
+  
+  <!-- Home button -->
+  <a href="index.html" class="home-btn">
+    <i class="fas fa-home"></i>
+    홈으로
+  </a>
+  
+  <!-- Grid view button -->
+  <a href="gallery-grid.html" class="home-btn" style="top: 120px;">
+    <i class="fas fa-th"></i>
+    그리드 보기
+  </a>
+  
+  <!-- Dots indicator -->
+  <div class="dots" id="dots"></div>
+  
+  <!-- Thumbnail toggle button -->
+  <button class="thumbnail-toggle" id="thumbnailToggle" title="썸네일 표시/숨김 (T키)">
+    <i class="fas fa-images"></i>
+  </button>
+
+  <script>
+    // Image list - 실제 이미지 파일들
+    const images = [
+      {
+        src: 'image_installation/113749261_KakaoTalk_20191029_174739463.jpg',
+        title: '이온히팅보일러 설치 현장 1',
+        description: '설치 과정 - 초기 작업'
+      },
+      {
+        src: 'image_installation/1281737349_KakaoTalk_20191029_174738485.jpg',
+        title: '이온히팅보일러 설치 현장 2', 
+        description: '설치 과정 - 배관 작업'
+      },
+      {
+        src: 'image_installation/1743492305297.jpg',
+        title: '이온히팅보일러 설치 현장 3',
+        description: '최신 설치 사례 - 2024년'
+      },
+      {
+        src: 'image_installation/1743492305844.jpg',
+        title: '이온히팅보일러 설치 현장 4',
+        description: '설치 완료 - 시스템 테스트'
+      },
+      {
+        src: 'image_installation/1743492305981.jpg',
+        title: '이온히팅보일러 설치 현장 5',
+        description: '설치 완료 - 최종 점검'
+      },
+      {
+        src: 'image_installation/1743492306455.jpg',
+        title: '이온히팅보일러 설치 현장 6',
+        description: '설치 현장 - 작업 진행'
+      },
+      {
+        src: 'image_installation/1743492306634.jpg',
+        title: '이온히팅보일러 설치 현장 7',
+        description: '설치 완료 후 점검'
+      },
+      {
+        src: 'image_installation/ion heaing_Hyundai outlet.jpeg',
+        title: '현대자동차 아울렛 설치',
+        description: '현대자동차 아울렛 - 이온히팅보일러 설치'
+      },
+      {
+        src: 'image_installation/Resized_20250321_152446_1742549840925.jpeg',
+        title: '2025년 설치 현장 1',
+        description: '최신 설치 사례 - 2025년 3월'
+      },
+      {
+        src: 'image_installation/Resized_20250321_152657_1742549839784.jpeg',
+        title: '2025년 설치 현장 2', 
+        description: '설치 과정 - 세부 작업'
+      },
+      {
+        src: 'image_installation/Resized_20250409_232559_1744268149141.jpeg',
+        title: '2025년 설치 현장 3',
+        description: '설치 완료 - 4월 사례'
+      },
+      {
+        src: 'image_installation/Resized_20250416_144935_1744785259867.jpeg',
+        title: '2025년 설치 현장 4',
+        description: '설치 과정 - 4월 16일'
+      },
+      {
+        src: 'image_installation/Resized_20250416_145228_1744785256256.jpeg',
+        title: '2025년 설치 현장 5',
+        description: '설치 완료 - 최종 확인'
+      },
+      {
+        src: 'image_installation/wmremove-transformed.png',
+        title: '제품 이미지 1',
+        description: '이온히팅보일러 제품 사진'
+      },
+      {
+        src: 'image_installation/wmremove-transformed1.png',
+        title: '제품 이미지 2',
+        description: '이온히팅보일러 제품 사진'
+      },
+      {
+        src: 'image_installation/wmremove-transformed2.png',
+        title: '제품 이미지 3',
+        description: '이온히팅보일러 제품 사진'
+      },
+      {
+        src: 'image_installation/wmremove-transformed3.png',
+        title: '제품 이미지 4',
+        description: '이온히팅보일러 제품 사진'
+      }
+    ];
+
+    let currentSlide = 0;
+    let isPlaying = true;
+    let slideInterval;
+    let userInteractionTimer;
+    let thumbnailVisible = false;
+    let thumbnailAutoHideTimer;
+    let isHoveringThumbnails = false;
+    
+    // DOM elements
+    const container = document.querySelector('.gallery-container');
+    const loading = document.getElementById('loading');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playPauseBtn = document.getElementById('playPause');
+    const currentEl = document.getElementById('current');
+    const totalEl = document.getElementById('total');
+    const dotsContainer = document.getElementById('dots');
+    const thumbnailContainer = document.getElementById('thumbnailContainer');
+    const thumbnailBar = document.getElementById('thumbnailBar');
+    const thumbnailHoverZone = document.getElementById('thumbnailHoverZone');
+    const thumbnailToggle = document.getElementById('thumbnailToggle');
+    
+    // Initialize gallery
+    async function initGallery() {
+      totalEl.textContent = images.length;
+      
+      // Create slides and thumbnails
+      for (let i = 0; i < images.length; i++) {
+        // Create slide
+        const slide = document.createElement('div');
+        slide.className = `slide ${i === 0 ? 'active' : ''}`;
+        
+        const img = document.createElement('img');
+        img.src = images[i].src;
+        img.alt = images[i].title;
+        img.onerror = function() {
+          console.log(`Failed to load: ${this.src}`);
+          this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuydtOuvuOyngCDsl4bsnYzsnKU8L3RleHQ+PC9zdmc+';
+        };
+        
+        slide.appendChild(img);
+        container.appendChild(slide);
+        
+        // Create thumbnail
+        const thumbnail = document.createElement('div');
+        thumbnail.className = `thumbnail ${i === 0 ? 'active' : ''}`;
+        
+        const thumbImg = document.createElement('img');
+        thumbImg.src = images[i].src;
+        thumbImg.alt = images[i].title;
+        thumbImg.onerror = function() {
+          this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM5OTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7sl4Y8L3RleHQ+PC9zdmc+';
+        };
+        
+        thumbnail.appendChild(thumbImg);
+        thumbnail.addEventListener('click', () => {
+          pauseAutoPlay();
+          goToSlide(i);
+        });
+        thumbnailContainer.appendChild(thumbnail);
+        
+        // Create dot
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => {
+          pauseAutoPlay();
+          goToSlide(i);
+        });
+        dotsContainer.appendChild(dot);
+      }
+      
+      // Hide loading
+      loading.style.display = 'none';
+      
+      // Load thumbnail visibility preference
+      const savedThumbnailVisibility = localStorage.getItem('thumbnailVisible');
+      if (savedThumbnailVisibility === 'true') {
+        showThumbnails();
+      }
+      
+      // Start slideshow
+      startSlideshow();
+      updateNavButtons();
+      initThumbnailControls();
+    }
+    
+    function showSlide(n) {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      
+      // Remove active class from all
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      thumbnails.forEach(thumb => thumb.classList.remove('active'));
+      
+      // Add active class to current
+      slides[n].classList.add('active');
+      dots[n].classList.add('active');
+      thumbnails[n].classList.add('active');
+      
+      currentEl.textContent = n + 1;
+      updateNavButtons();
+      scrollToActiveThumbnail(n);
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % images.length;
+      showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + images.length) % images.length;
+      showSlide(currentSlide);
+    }
+    
+    function goToSlide(n) {
+      currentSlide = n;
+      showSlide(currentSlide);
+    }
+    
+    function updateNavButtons() {
+      prevBtn.classList.toggle('disabled', currentSlide === 0);
+      nextBtn.classList.toggle('disabled', currentSlide === images.length - 1);
+    }
+    
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+      const icon = playPauseBtn.querySelector('i');
+      
+      if (isPlaying) {
+        icon.className = 'fas fa-pause';
+        startSlideshow();
+      } else {
+        icon.className = 'fas fa-play';
+        stopSlideshow();
+      }
+    }
+    
+    function startSlideshow() {
+      if (slideInterval) clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4000); // 4초마다 전환
+    }
+    
+    function stopSlideshow() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+      }
+    }
+    
+    // Auto-resume after user interaction
+    function pauseAutoPlay() {
+      if (isPlaying) {
+        stopSlideshow();
+        // Clear existing timer
+        if (userInteractionTimer) clearTimeout(userInteractionTimer);
+        // Resume auto-play after 3 seconds of inactivity
+        userInteractionTimer = setTimeout(() => {
+          if (isPlaying) {
+            startSlideshow();
+          }
+        }, 3000);
+      }
+    }
+    
+    // Scroll thumbnail bar to show active thumbnail
+    function scrollToActiveThumbnail(index) {
+      const thumbnail = thumbnailContainer.children[index];
+      if (thumbnail) {
+        const containerWidth = thumbnailContainer.offsetWidth;
+        const thumbnailLeft = thumbnail.offsetLeft;
+        const thumbnailWidth = thumbnail.offsetWidth;
+        const scrollLeft = thumbnailLeft - (containerWidth / 2) + (thumbnailWidth / 2);
+        
+        thumbnailContainer.scrollTo({
+          left: Math.max(0, scrollLeft),
+          behavior: 'smooth'
+        });
+      }
+    }
+    
+    // Thumbnail visibility controls
+    function showThumbnails() {
+      thumbnailVisible = true;
+      thumbnailBar.classList.add('visible');
+      thumbnailToggle.classList.add('active');
+      const icon = thumbnailToggle.querySelector('i');
+      icon.className = 'fas fa-eye-slash';
+      localStorage.setItem('thumbnailVisible', 'true');
+    }
+    
+    function hideThumbnails() {
+      thumbnailVisible = false;
+      thumbnailBar.classList.remove('visible');
+      thumbnailToggle.classList.remove('active');
+      const icon = thumbnailToggle.querySelector('i');
+      icon.className = 'fas fa-images';
+      localStorage.setItem('thumbnailVisible', 'false');
+    }
+    
+    function toggleThumbnails() {
+      if (thumbnailVisible) {
+        hideThumbnails();
+      } else {
+        showThumbnails();
+      }
+    }
+    
+    // Auto-hide thumbnails after delay
+    function startThumbnailAutoHide() {
+      if (thumbnailAutoHideTimer) clearTimeout(thumbnailAutoHideTimer);
+      thumbnailAutoHideTimer = setTimeout(() => {
+        if (!isHoveringThumbnails && thumbnailVisible) {
+          hideThumbnails();
+        }
+      }, 3000);
+    }
+    
+    // Initialize thumbnail controls
+    function initThumbnailControls() {
+      // Hover zone detection
+      thumbnailHoverZone.addEventListener('mouseenter', () => {
+        if (!thumbnailVisible) {
+          showThumbnails();
+          startThumbnailAutoHide();
+        }
+      });
+      
+      // Thumbnail bar hover
+      thumbnailBar.addEventListener('mouseenter', () => {
+        isHoveringThumbnails = true;
+        if (thumbnailAutoHideTimer) clearTimeout(thumbnailAutoHideTimer);
+      });
+      
+      thumbnailBar.addEventListener('mouseleave', () => {
+        isHoveringThumbnails = false;
+        startThumbnailAutoHide();
+      });
+      
+      // Toggle button
+      thumbnailToggle.addEventListener('click', toggleThumbnails);
+      
+      // Touch support for mobile
+      let touchTimer;
+      document.addEventListener('touchstart', () => {
+        if (!thumbnailVisible) {
+          showThumbnails();
+          touchTimer = setTimeout(() => {
+            if (thumbnailVisible && !isHoveringThumbnails) {
+              hideThumbnails();
+            }
+          }, 3000);
+        }
+      });
+      
+      document.addEventListener('touchend', () => {
+        if (touchTimer) clearTimeout(touchTimer);
+      });
+    }
+    
+    // Event listeners with smart pause
+    prevBtn.addEventListener('click', () => {
+      pauseAutoPlay();
+      prevSlide();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      pauseAutoPlay();
+      nextSlide();
+    });
+    
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    
+    // Keyboard navigation with smart pause and thumbnail controls
+    document.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowLeft':
+          pauseAutoPlay();
+          prevSlide();
+          break;
+        case 'ArrowRight':
+        case ' ':
+          pauseAutoPlay();
+          nextSlide();
+          break;
+        case 'Escape':
+          window.location.href = 'index.html';
+          break;
+        case 't':
+        case 'T':
+          toggleThumbnails();
+          break;
+        case 'h':
+        case 'H':
+          // Hide all UI
+          document.body.classList.toggle('hide-ui');
+          break;
+      }
+    });
+    
+    // Touch navigation with smart pause
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > 50) {
+        pauseAutoPlay();
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    });
+    
+    // Check URL parameters for direct slide access
+    function checkURLParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slideParam = urlParams.get('slide') || window.location.hash.replace('#slide=', '');
+      
+      if (slideParam) {
+        const slideIndex = parseInt(slideParam) - 1;
+        if (slideIndex >= 0 && slideIndex < images.length) {
+          currentSlide = slideIndex;
+          showSlide(currentSlide);
+        }
+      }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      initGallery();
+      checkURLParams();
+    });
+  </script>
+</body>
+</html>

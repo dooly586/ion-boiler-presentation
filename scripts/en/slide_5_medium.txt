@@ -1,0 +1,5 @@
+Let me explain the core technological principles of our Ion Heating Boiler.
+
+Our system operates on a completely different principle from conventional indirect heating methods. We apply alternating current directly to water, generating heat through ion friction movement.
+
+Because water molecules generate thermal energy directly, there's virtually no heat transfer loss. This is why our efficiency is exceptionally high.

@@ -1,0 +1,3 @@
+Our Ion Heating Boiler uses alternating current applied directly to water, generating heat through ion friction movement.
+
+This 'molecular friction heat' principle eliminates heat transfer losses, achieving exceptional efficiency.

@@ -1,0 +1,5 @@
+Let's examine actual implementation cases.
+
+Our most prominent success story is Hyundai Motor's Asan Plant. Through implementing our ion heating system, Hyundai Motor achieved annual energy cost savings of 1.05 million dollars and accomplished a remarkable reduction of 2,456 tons in CO2 emissions.
+
+Daesang Food Plant demonstrated 41% operating cost reduction, while Novelis Korea achieved 46% cost savings - consistently excellent results.
